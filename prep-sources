@@ -3,9 +3,9 @@
 # Prepare source for RPM build
 
 # remove dev dependencies
-egrep -v '[href,src]="dev/[a-zA-Z0-9.]+"' src/index.html > /dev/null
+egrep -v '[href,src]="dev/[a-zA-Z0-9.]+"' ui/index.html > /dev/null
 
 # download langs from transifex
 
 # tar directory
-cd src; tar cvzf ../nethserver-cockpit-empty.tar.gz *
+cd ui; tar cvzf ../nethserver-cockpit-empty.tar.gz *
