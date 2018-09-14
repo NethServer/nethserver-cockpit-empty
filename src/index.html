@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- nethserver styles -->
+    <link href="../base1/patternfly.css" rel="stylesheet">
+    <link href="../nethserver/applications/style.css" rel="stylesheet">
+    <!-- dev only -->
+    <link href="dev/patternfly.css" rel="stylesheet">
+    <!-- -->
+
+    <!-- module styles-->
+    <link href="css/style.css" rel="stylesheet">
+    <!-- -->
+
+    <title>NethServer Cockpit Empty</title>
+</head>
+
+<body>
+    <div id="app" class="cards-pf">
+        <nav id="navbar-left" class="nav-pf-vertical nav-pf-vertical-with-sub-menus nav-pf-persistent-secondary panel-group">
+            <ul class="list-group panel">
+
+                <li id="dashboard-item" class="list-group-item">
+                    <a href="#/">
+                        <span class="fa fa-cube"></span>
+                        <span class="list-group-item-value">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="li-empty"></li>
+
+                <li id="item1-item" class="list-group-item">
+                    <a href="#/item1">
+                        <span class="fa fa-object-ungroup"></span>
+                        <span class="list-group-item-value">Item 1</span>
+                    </a>
+                </li>
+
+                <li class="li-empty"></li>
+
+                <li id="logs-item" class="list-group-item">
+                    <a href="#/logs">
+                        <span class="fa fa-list"></span>
+                        <span class="list-group-item-value">Logs</span>
+
+                    </a>
+                </li>
+
+                <li class="li-empty"></li>
+
+                <li id="about-item" class="list-group-item">
+                    <a href="#/about">
+                        <span class="fa fa-info"></span>
+                        <span class="list-group-item-value">About</span>
+
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <div class="container-fluid container-cards-pf main-container">
+            <div id="app-views">
+                <!-- template will be injected here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- nethserver scripts-->
+    <script src="../base1/jquery.min.js"></script>
+    <script src="../base1/cockpit.min.js"></script>
+    <!-- dev only -->
+    <script src="dev/jquery.min.js"></script>
+    <script src="dev/cockpit.min.js"></script>
+    <!-- -->
+
+    <!-- module scripts-->
+    <script src="js/lib/sammy.js"></script>
+    <script src="js/lib/sammy.template.js"></script>
+    <script src="i18n/lang.js"></script>
+    <script src="js/app.js"></script>
+    <!-- -->
+</body>
+
+</html>

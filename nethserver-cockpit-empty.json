@@ -1,0 +1,23 @@
+{
+    "id": "nethserver-cockpit-empty",
+    "name": "NethServer Cockpit Empty",
+    "summary": "Short description of NethServer Cockpit Empty",
+    "description": "Very very very very very long description of NethServer Cockpit Empty",
+    "url": "nethserver-cockpit-empty",
+    "homepage": "https://github.com/NethServer/nethserver-cockpit-empty",
+    "provides": ["nethserver-cockpit-empty"],
+    "release": {
+        "version": "1.0.0"
+    },
+    "tags": ["tag1", "tag2", "tag3"],
+    "license": "GPL-3.0",
+    "bugs": {
+        "url": "https://github.com/NethServer/dev/issues"
+    },
+    "author": {
+        "name": "Author's name of NethServer Cockpit Empty",
+        "url": "https://github.com/NethServer/nethserver-cockpit-empty",
+        "email": "Author's email of NethServer Cockpit Empty"
+    },
+    "icon": "icon.png"
+}
