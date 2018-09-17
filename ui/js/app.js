@@ -29,9 +29,10 @@ $(document).on("nethserver-loaded", function () {
 
         this.before('.*', function () {
 
-            var hash = document.location.hash;
+            var hash = document.location.hash.replace("/", "");
+            hash = hash == '#' ? '#dashboard' : hash
             $("nav>ul>li").removeClass("active");
-            $("nav>ul>li" + hash.replace("/", "") + "-item").addClass("active");
+            $("nav>ul>li" + hash + "-item").addClass("active");
         });
 
     });
