@@ -38,4 +38,20 @@ $(document).on("nethserver-loaded", function () {
     });
 
     app.run('#/');
+
+    /* call nethserver notifications */
+    // success
+    parent.vm.$children[0].notifications.success.show = true
+    parent.vm.$children[0].notifications.success.message = "Your success message"
+
+    // error
+    parent.vm.$children[0].notifications.error.show = true
+    parent.vm.$children[0].notifications.error.message = "Your error message"
+
+    // event
+    parent.vm.$children[0].notifications.event.show = true
+    parent.vm.$children[0].notifications.event.name = "Your event name"
+    parent.vm.$children[0].notifications.event.message = "Your action-name"
+    parent.vm.$children[0].notifications.event.progress = 50
+    /* */
 })
