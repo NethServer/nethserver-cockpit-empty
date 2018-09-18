@@ -43,6 +43,9 @@ $(document).on("nethserver-loaded", function () {
     // success
     parent.vm.$children[0].notifications.success.show = true
     parent.vm.$children[0].notifications.success.message = "Your success message"
+    setTimeout(function () {
+        parent.vm.$children[0].notifications.success.show = false;
+    }, 3000)
 
     // error
     parent.vm.$children[0].notifications.error.show = true
