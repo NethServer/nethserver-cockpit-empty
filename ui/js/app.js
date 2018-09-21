@@ -40,21 +40,96 @@ $(document).on("nethserver-loaded", function () {
     app.run('#/');
 
     /* call nethserver notifications */
-    // success
-    parent.vm.$children[0].notifications.success.show = true
-    parent.vm.$children[0].notifications.success.message = "Your success message"
+    // success - hide notifications after 3 seconds
+    parent.ns.$children[0].notifications.success.show = true
+    parent.ns.$children[0].notifications.success.message = "Your success message"
     setTimeout(function () {
-        parent.vm.$children[0].notifications.success.show = false;
+        parent.ns.$children[0].notifications.success.show = false;
     }, 3000)
 
     // error
-    parent.vm.$children[0].notifications.error.show = true
-    parent.vm.$children[0].notifications.error.message = "Your error message"
+    parent.ns.$children[0].notifications.error.show = true
+    parent.ns.$children[0].notifications.error.message = "Your error message"
 
     // event
-    parent.vm.$children[0].notifications.event.show = true
-    parent.vm.$children[0].notifications.event.name = "Your event name"
-    parent.vm.$children[0].notifications.event.message = "Your action-name"
-    parent.vm.$children[0].notifications.event.progress = 50
+    parent.ns.$children[0].notifications.event.show = true
+    parent.ns.$children[0].notifications.event.name = "Your event name"
+    parent.ns.$children[0].notifications.event.message = "Your action-name"
+    parent.ns.$children[0].notifications.event.progress = 50
+    /* */
+
+    /* call nethserver api */
+    // read
+    function read() {
+        parent.ns.exec(
+            ["nethserver-cockpit-empty/read"],
+            null,
+            null,
+            function (success) {
+                success = JSON.parse(success);
+                return success
+            },
+            function (error) {
+                return error
+            }
+        );
+    }
+
+
+    // validate
+    function validate(obj, callback) {
+        parent.ns.exec(
+            ["nethserver-cockpit-empty/validate"],
+            obj,
+            null,
+            function (success) {
+                var success = JSON.parse(success);
+                callback(success)
+            },
+            function (error, data) {
+                var errorData = JSON.parse(data);
+                callback(errorData)
+            }
+        );
+    }
+
+    // update
+    function update(obj, callback) {
+        parent.ns.exec(
+            ["nethserver-cockpit-empty/update"],
+            obj,
+            function (stream) {
+                console.info("nethserver-cockpit-empty", stream);
+            },
+            function (success) {
+                callback(success);
+            },
+            function (error) {
+                callback(error);
+            }
+        );
+    }
+
+    var status = read();
+    console.log(status);
+
+    var validateObj = {}
+    validate(validateObj, function (result) {
+        // check errors
+        // if(result) { ... }
+
+        // if no errors
+        // update value
+        update(validateObj, function (result) {
+            // if errors
+            parent.ns.$children[0].notifications.error.message = _("edit_error");
+
+            // if no errors
+            parent.ns.$children[0].notifications.success.message = _("edit_ok");
+            setTimeout(function () {
+                parent.ns.$children[0].notifications.success.show = false;
+            }, 3000)
+        })
+    });
     /* */
 })
