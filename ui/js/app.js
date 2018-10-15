@@ -110,6 +110,24 @@ $(document).on("nethserver-loaded", function () {
         );
     }
 
+    // exec command and get raw output
+    function execCmd(obj, stream, callback) {
+        parent.ns.execRaw(
+            ["nethserver-cockpit-empty/execute"],
+            obj,
+            function (output) {
+                // this is the raw output from command
+                stream(output);
+            },
+            function (success) {
+                callback(success);
+            },
+            function (error) {
+                callback(error);
+            }
+        );
+    }
+
     var status = read();
     console.log(status);
 
@@ -131,5 +149,15 @@ $(document).on("nethserver-loaded", function () {
             }, 3000)
         })
     });
+
+    var command = execCmd({
+        action: 'my-action',
+        function (output) {
+            $('#my-textarea').append(output);
+        },
+        function (result) {
+            console.info(result);
+        }
+    })
     /* */
 })
