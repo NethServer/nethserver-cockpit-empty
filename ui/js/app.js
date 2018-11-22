@@ -60,17 +60,17 @@ $(document).on("nethserver-loaded", function () {
 
     /* call nethserver api */
     // read
-    function read() {
+    function read(callback) {
         parent.ns.exec(
             ["nethserver-cockpit-empty/read"],
             null,
             null,
             function (success) {
                 success = JSON.parse(success);
-                return success
+                callback(success)
             },
             function (error) {
-                return error
+                callback(error)
             }
         );
     }
@@ -128,8 +128,9 @@ $(document).on("nethserver-loaded", function () {
         );
     }
 
-    var status = read();
-    console.log(status);
+    read(function (response) {
+        console.log(response);
+    });
 
     var validateObj = {}
     validate(validateObj, function (result) {
