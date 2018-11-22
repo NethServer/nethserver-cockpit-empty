@@ -61,7 +61,7 @@ $(document).on("nethserver-loaded", function () {
     /* call nethserver api */
     // read
     function read(callback) {
-        parent.ns.exec(
+        nethserver.exec(
             ["nethserver-cockpit-empty/read"],
             null,
             null,
@@ -78,7 +78,7 @@ $(document).on("nethserver-loaded", function () {
 
     // validate
     function validate(obj, callback) {
-        parent.ns.exec(
+        nethserver.exec(
             ["nethserver-cockpit-empty/validate"],
             obj,
             null,
@@ -95,7 +95,7 @@ $(document).on("nethserver-loaded", function () {
 
     // update
     function update(obj, callback) {
-        parent.ns.exec(
+        nethserver.exec(
             ["nethserver-cockpit-empty/update"],
             obj,
             function (stream) {
@@ -112,7 +112,7 @@ $(document).on("nethserver-loaded", function () {
 
     // exec command and get raw output
     function execCmd(obj, stream, callback) {
-        parent.ns.execRaw(
+        nethserver.execRaw(
             ["nethserver-cockpit-empty/execute"],
             obj,
             function (output) {
@@ -131,6 +131,7 @@ $(document).on("nethserver-loaded", function () {
     read(function (response) {
         console.log(response);
     });
+
 
     var validateObj = {}
     validate(validateObj, function (result) {
