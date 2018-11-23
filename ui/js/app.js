@@ -66,8 +66,12 @@ $(document).on("nethserver-loaded", function () {
             null,
             null,
             function (success) {
-                success = JSON.parse(success);
-                callback(success)
+                try {
+                    success = JSON.parse(success);
+                    callback(success)
+                } catch (e) {
+                    callback(e)
+                }
             },
             function (error) {
                 callback(error)
@@ -83,12 +87,16 @@ $(document).on("nethserver-loaded", function () {
             obj,
             null,
             function (success) {
-                var success = JSON.parse(success);
-                callback(success)
+                callback(null)
             },
             function (error, data) {
-                var errorData = JSON.parse(data);
-                callback(errorData)
+                var errorData = {};
+                try {
+                    errorData = JSON.parse(data);
+                    callback(errorData)
+                } catch (e) {
+                    callback(e)
+                }
             }
         );
     }
@@ -128,15 +136,32 @@ $(document).on("nethserver-loaded", function () {
         );
     }
 
+    // read logs from application
+    function readLogs(obj, stream, callback) {
+        nethserver.readLogs(obj,
+            stream,
+            function (success) {
+                // get logs dump output
+                callback(success);
+            },
+            function (error) {
+                callback(error);
+            },
+            false // not as superuser
+        );
+    }
+
     read(function (response) {
         console.log(response);
     });
 
 
     var validateObj = {}
-    validate(validateObj, function (result) {
+    validate(validateObj, function (response) {
         // check errors
-        // if(result) { ... }
+        if (response) {
+            console.error(response)
+        }
 
         // if no errors
         // update value
@@ -152,14 +177,37 @@ $(document).on("nethserver-loaded", function () {
         })
     });
 
-    var command = execCmd({
-        action: 'my-action',
+    execCmd({
+            action: 'my-action',
+        },
         function (output) {
             $('#my-textarea').append(output);
         },
         function (result) {
             console.info(result);
         }
+    )
+
+    // read logs in follow mode | tail -f /var/log/messages
+    readLogs({
+        "action": "follow",
+        "lines": null,
+        "mode": "systemd",
+        "paths": ["httpd"]
+    }, function (output) {
+        console.log(output)
+    }, function (dump) {
+        console.log(dump)
+    })
+
+    // read logs and dump to output | cat /var/log/messages with last n lines
+    readLogs({
+        "action": "dump",
+        "lines": 20,
+        "mode": "file",
+        "paths": ["/var/log/messages"]
+    }, null, function (dump) {
+        console.log(dump)
     })
     /* */
 })
