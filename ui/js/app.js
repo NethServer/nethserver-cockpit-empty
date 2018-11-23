@@ -210,4 +210,10 @@ $(document).on("nethserver-loaded", function () {
         console.log(dump)
     })
     /* */
+
+    /* i18n */
+    $('[i18n]').each(function () {
+        $(this).text(_($(this).attr('i18n')))
+    });
+    /* */
 })

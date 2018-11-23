@@ -1,4 +1,6 @@
 {
-    "string_one": "String One",
-    "strong_two": "String Two"
+    "dashboard": "Dashboard",
+    "item_1": "Item 1",
+    "logs": "Logs",
+    "about": "About"
 }
