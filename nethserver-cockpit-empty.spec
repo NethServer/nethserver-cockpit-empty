@@ -32,6 +32,7 @@ tar xvf %{SOURCE1} -C %{buildroot}/usr/share/cockpit/%{name}/
 
 cp -a %{name}.json %{buildroot}/usr/share/cockpit/nethserver/applications/
 cp -a api/* %{buildroot}/usr/libexec/nethserver/api/%{name}/
+chmod +x %{buildroot}/usr/libexec/nethserver/api/%{name}/*
 
 %{genfilelist} %{buildroot} > filelist
 %files -f filelist
