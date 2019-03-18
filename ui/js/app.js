@@ -22,27 +22,27 @@ $(document).on("language-loaded", function () {
         this.use('Template');
 
         this.get('#/', function (context) {
-            context.app.swap('');
-            context.render('views/dashboard.html', {})
-                .appendTo(context.$element());
+            this.partial('views/dashboard.html', {}, function(context) {
+                applyTranslations();
+            });
         });
 
         this.get('#/item1', function (context) {
-            context.app.swap('');
-            context.render('views/item1.html', {})
-                .appendTo(context.$element());
+            this.partial('views/item1.html', {}, function(context) {
+                applyTranslations();
+            });
         });
 
         this.get('#/logs', function (context) {
-            context.app.swap('');
-            context.render('views/logs.html', {})
-                .appendTo(context.$element());
+            this.partial('views/logs.html', {}, function(context) {
+                applyTranslations();
+            });
         });
 
         this.get('#/about', function (context) {
-            context.app.swap('');
-            context.render('views/about.html', {})
-                .appendTo(context.$element());
+            this.partial('views/about.html', {}, function(context) {
+                applyTranslations();
+            });
         });
 
         this.before('.*', function () {
