@@ -1,4 +1,22 @@
-$(document).on("nethserver-loaded", function () {
+function _(string) {
+    return LANG_OBJ[string]
+}
+
+var LANG_OBJ = {}
+
+nethserver.fetchTranslatedStrings(function (data) {
+    LANG_OBJ = data
+    $(document).trigger("language-loaded");
+});
+
+$(document).on("language-loaded", function () {
+
+    function applyTranslations() {
+        $('[i18n]').each(function () {
+            $(this).text(_($(this).attr('i18n')))
+        });
+    }
+
     // define app routing
     var app = $.sammy('#app-views', function () {
         this.use('Template');
@@ -212,8 +230,6 @@ $(document).on("nethserver-loaded", function () {
     /* */
 
     /* i18n */
-    $('[i18n]').each(function () {
-        $(this).text(_($(this).attr('i18n')))
-    });
+    applyTranslations();
     /* */
 })
